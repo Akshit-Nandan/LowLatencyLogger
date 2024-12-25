@@ -1,0 +1,6 @@
+Starting to log
+Here are the values 
+std:string: Example String,
+cstring: Example C String,
+integer: 101,
+Value of pi: 3.14286
