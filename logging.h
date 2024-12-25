@@ -184,6 +184,42 @@ namespace Common
         }
         auto pushValue(const std::string &value) noexcept { pushValue(value.c_str()); }
 
+        template <typename T, typename... A>
+        auto log(const char *s, const T &value, A... args) noexcept
+        {
+            while (*s)
+            {
+                if (*s == '%')
+                {
+                    if (UNLIKELY(*(s + 1) == '%'))
+                    {
+                        ++s; // for adding % in log as normal char
+                    }
+                    else
+                    {
+                        pushValue(value);
+                        log(s + 1, args...);
+                        return;
+                    }
+                }
+                pushValue(*s++);
+            }
+            FATAL("extra arguments provided to log()");
+        }
+
+        auto log(const char *s) noexcept {
+            while(*s) {
+                if(*s == '%') {
+                    if(UNLIKELY(*(s+1))) {
+                        ++s;
+                    } else {
+                        FATAL("missing arguments to log()");
+                    }
+                }
+                pushValue(*s++);
+            }
+        }
+
     private:
         const std::string file_name_;
         std::ofstream file_;

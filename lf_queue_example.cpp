@@ -6,7 +6,7 @@ struct MyStruct
     int d_[3];
 };
 
-using namespace common;
+using namespace Common;
 auto consumeFunction(LFQueue<MyStruct> *lfq)
 {
     using namespace std::literals::chrono_literals;
