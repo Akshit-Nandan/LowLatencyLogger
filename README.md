@@ -1,2 +1,2 @@
 # LowLatencyLogger
-This is a fast low latency logger frame work made from the context for low latency application.
+This is a fast low latency logger made from the for low latency application.
